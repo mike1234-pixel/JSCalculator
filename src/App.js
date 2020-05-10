@@ -16,10 +16,6 @@ class App extends React.Component {
     this.setState({ display: "0" });
   }
 
-  // if display === "0", return
-  // if display 1-9, set state to display: "0"
-  // if last char is a number / is not " ", delete last char
-  // if last char is an operator / is " ", delete last three chars
   handleBackspace() {
     if (this.state.display === "0") {
       return;
@@ -32,7 +28,10 @@ class App extends React.Component {
       this.state.display === "6" ||
       this.state.display === "7" ||
       this.state.display === "8" ||
-      this.state.display === "9"
+      this.state.display === "9" ||
+      this.state.display === "-" ||
+      this.state.display === "Infinity" ||
+      this.state.display === "NaN"
     ) {
       this.setState({
         display: "0",
@@ -398,3 +397,6 @@ export default App;
 
 // LOOK MORE INTO ERROR BOUNDARIES
 // https://reactjs.org/docs/error-boundaries.html
+
+// FINAL (major) ISSUE --------
+// each number should only be allowed to contain one decimal place
