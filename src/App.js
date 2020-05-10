@@ -9,21 +9,46 @@ class App extends React.Component {
     this.handleClear = this.handleClear.bind(this);
     this.handleNum = this.handleNum.bind(this);
     this.handleEval = this.handleEval.bind(this);
+    this.handleBackspace = this.handleBackspace.bind(this);
   }
 
   handleClear() {
     this.setState({ display: "0" });
   }
 
-  // THE PROBLEM WAS OCCURING BECAUSE ENDSWITH WAS BEING CALLED ON A VALUE THAT, TO START WITH, WAS A NUMBER AND WAS NOT A STRING
-  // BECAUSE THIS.STATE.DISPLAY WAS A NUMBER IT DID NOT CONTAIN THE ENDSWITH FUNCTION, HENCE THE TYPE ERROR
-
-  // LIKELY TO RUN INTO SIMILAR PROBLEMS WHEN THE FIRST RESULT IS CALCULATED BECAUSE DISPLAY BECOMES A NUMBER
-  // NEED TO RUN EVAL ON DISPLAY THEN CONVERT IT BACK TO A STRING BEFORE VALUE IS PUT BACK IN DISPLAY
-
-  // When the decimal element is clicked, a "." should append to the currently displayed value; two "." in one number should not be accepted
-  // If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (-) sign.
-  // so, if the last char is " ", indicating an operator is the last character in the sequence, slice off the last two characters and add the new operator
+  // if display === "0", return
+  // if display 1-9, set state to display: "0"
+  // if last char is a number / is not " ", delete last char
+  // if last char is an operator / is " ", delete last three chars
+  handleBackspace() {
+    if (this.state.display === "0") {
+      return;
+    } else if (
+      this.state.display === "1" ||
+      this.state.display === "2" ||
+      this.state.display === "3" ||
+      this.state.display === "4" ||
+      this.state.display === "5" ||
+      this.state.display === "6" ||
+      this.state.display === "7" ||
+      this.state.display === "8" ||
+      this.state.display === "9"
+    ) {
+      this.setState({
+        display: "0",
+      });
+    } else if (this.state.display.endsWith(" ") === false) {
+      let sliced = this.state.display.slice(0, 0 - 1);
+      this.setState({
+        display: sliced,
+      });
+    } else if (this.state.display.endsWith(" ") === true) {
+      let sliced = this.state.display.slice(0, 0 - 3);
+      this.setState({
+        display: sliced,
+      });
+    }
+  }
 
   handleNum(e) {
     if (this.state.display === "Infinity" || this.state.display === "NaN") {
@@ -287,11 +312,6 @@ class App extends React.Component {
   handleEval() {
     if (this.state.display.endsWith(" ") === true) {
       return;
-      // this.setState((prevState) => ({
-      //   display: eval(this.state.display + " 0").toString(),
-      //   // display: prevState.display.toString() + " 0",
-      // }));
-      // FIRST DO THIS, THEN EVAL
     } else {
       let result = eval(this.state.display);
       console.log(result);
@@ -358,7 +378,9 @@ class App extends React.Component {
         <button id="decimal" onClick={this.handleNum}>
           .
         </button>
-        <button id="backspace">backspace</button>
+        <button id="backspace" onClick={this.handleBackspace}>
+          backspace
+        </button>
         <button id="clear" onClick={this.handleClear}>
           AC
         </button>
@@ -371,7 +393,7 @@ export default App;
 
 // ADDITIONAL:
 // ADD KEY PRESS
-// ADD DELETE KEY
+
 // DO SOMETHING IF ERROR
 
 // LOOK MORE INTO ERROR BOUNDARIES
