@@ -293,15 +293,7 @@ class App extends React.Component {
           display: prevState.display.toString() + " / ",
         }));
       }
-    } else if (
-      e.target.id === "decimal"
-      // onclick .
-      //string.split(" ").splice(-1).toString() grabs the last value
-      // split the string by " ",
-      // look at the last word
-      // if the last word includes ".", do nothing
-      // otherwise add "."
-    ) {
+    } else if (e.target.id === "decimal") {
       let lastValue = this.state.display.split(" ").splice(-1).toString();
 
       if (lastValue.includes(".") === false) {
@@ -314,9 +306,16 @@ class App extends React.Component {
     }
   }
 
+  // if last char is an operator followed by a decimal  (" ."), return or replace "." with "0"
+
   handleEval() {
-    if (this.state.display.endsWith(" ") === true) {
-      return;
+    if (this.state.display.endsWith(" .")) {
+      let sliced = this.state.display.slice(0, -1);
+      this.setState({
+        display: eval(sliced + "0").toString(), // if last char is an operator followed by a decimal  (" ."), convert to "0", then evaluate
+      });
+    } else if (this.state.display.endsWith(" ") === true) {
+      return; // if statement ends with an operator, exit function
     } else {
       let result = eval(this.state.display);
       console.log(result);
@@ -326,8 +325,6 @@ class App extends React.Component {
         });
       }
     }
-
-    // console.log(eval(this.state.display));
   }
 
   render() {
@@ -403,12 +400,3 @@ export default App;
 
 // LOOK MORE INTO ERROR BOUNDARIES
 // https://reactjs.org/docs/error-boundaries.html
-
-// FINAL (major) ISSUE --------
-// each number should only be allowed to contain one decimal place
-
-// onclick .
-// split the string by " ",
-// look at the last word
-// if the last word includes ".", do nothing
-// otherwise add "."
