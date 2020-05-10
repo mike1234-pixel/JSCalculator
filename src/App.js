@@ -295,18 +295,24 @@ class App extends React.Component {
       }
     } else if (
       e.target.id === "decimal"
-      // &&
-      // this.state.display.includes(".") === false
+      // onclick .
+      //string.split(" ").splice(-1).toString() grabs the last value
+      // split the string by " ",
+      // look at the last word
+      // if the last word includes ".", do nothing
+      // otherwise add "."
     ) {
-      this.setState((prevState) => ({
-        display: prevState.display.toString() + ".",
-      }));
+      let lastValue = this.state.display.split(" ").splice(-1).toString();
+
+      if (lastValue.includes(".") === false) {
+        this.setState((prevState) => ({
+          display: prevState.display.toString() + ".",
+        }));
+      } else {
+        return;
+      }
     }
   }
-
-  // EQUALS ONCLICK
-  // if last character in string is " " (meaning string ends with operator),
-  // setstate - add "0" to the end, then evaluate
 
   handleEval() {
     if (this.state.display.endsWith(" ") === true) {
@@ -400,3 +406,9 @@ export default App;
 
 // FINAL (major) ISSUE --------
 // each number should only be allowed to contain one decimal place
+
+// onclick .
+// split the string by " ",
+// look at the last word
+// if the last word includes ".", do nothing
+// otherwise add "."
