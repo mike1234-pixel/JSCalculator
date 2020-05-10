@@ -56,10 +56,13 @@ class App extends React.Component {
     console.log(e.target.id); // gets the id of the clicked button
 
     if (e.target.id === "zero") {
+      let lastValue = this.state.display.split(" ").splice(-1).toString();
       if (
-        this.state.display !== "0" &&
-        this.state.display.startsWith("0", 0) === false &&
-        this.state.display.endsWith(" 0") === false
+        (this.state.display !== "0" &&
+          this.state.display.startsWith("0", 0) === false &&
+          this.state.display.endsWith(" 0") === false) ||
+        this.state.display.endsWith(" ") ||
+        lastValue.includes(".")
       ) {
         console.log("pass");
         this.setState((prevState) => ({
@@ -309,7 +312,7 @@ class App extends React.Component {
   // if last char is an operator followed by a decimal  (" ."), return or replace "." with "0"
 
   handleEval() {
-    if (this.state.display.endsWith(" .")) {
+    if (this.state.display.endsWith(" .") || this.state.display === "-") {
       let sliced = this.state.display.slice(0, -1);
       this.setState({
         display: eval(sliced + "0").toString(), // if last char is an operator followed by a decimal  (" ."), convert to "0", then evaluate
@@ -400,3 +403,13 @@ export default App;
 
 // LOOK MORE INTO ERROR BOUNDARIES
 // https://reactjs.org/docs/error-boundaries.html
+
+// eval is risky only in server side javascript in scenarios like parsing user input
+// this opens the program up to injection attacks.
+// it can also create performance issues when compiled.
+// in this case eval is on the client, does not parse user input text and is being interpreted.
+
+// 5 * - + 5
+
+// minor issues
+// if 0. -- can't add any zeros after the decimal place
