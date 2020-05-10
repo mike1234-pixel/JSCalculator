@@ -49,13 +49,27 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    document.addEventListener("keydown", (e) => {
+      if ((e.shiftKey === false && e.keyCode === 187) || e.keyCode === 13) {
+        this.handleEval();
+      } else if (e.shiftKey === true && e.keyCode === 8) {
+        this.handleClear();
+      } else if (e.keyCode === 8) {
+        this.handleBackspace();
+      } else {
+        this.handleNum(e);
+      }
+    });
+  }
+
   handleNum(e) {
     if (this.state.display === "Infinity" || this.state.display === "NaN") {
       this.setState({ display: "" });
     }
     console.log(e.target.id); // gets the id of the clicked button
 
-    if (e.target.id === "zero") {
+    if (e.target.id === "zero" || e.keyCode === 48 || e.keyCode === 96) {
       let lastValue = this.state.display.split(" ").splice(-1).toString();
       if (
         (this.state.display !== "0" &&
@@ -69,7 +83,7 @@ class App extends React.Component {
           display: prevState.display.toString() + "0",
         }));
       }
-    } else if (e.target.id === "one") {
+    } else if (e.target.id === "one" || e.keyCode === 49 || e.keyCode === 97) {
       // ONE
       if (this.state.display.slice(-2) === " 0") {
         // if string endsWith " 0", slice off last character and add zero
@@ -89,7 +103,7 @@ class App extends React.Component {
           display: "1",
         });
       }
-    } else if (e.target.id === "two") {
+    } else if (e.target.id === "two" || e.keyCode === 50 || e.keyCode === 98) {
       // TWO
 
       if (this.state.display.endsWith(" 0") === true) {
@@ -106,7 +120,11 @@ class App extends React.Component {
           display: "2",
         });
       }
-    } else if (e.target.id === "three") {
+    } else if (
+      e.target.id === "three" ||
+      e.keyCode === 51 ||
+      e.keyCode === 99
+    ) {
       // THREE
 
       if (this.state.display.endsWith(" 0") === true) {
@@ -123,7 +141,11 @@ class App extends React.Component {
           display: "3",
         });
       }
-    } else if (e.target.id === "four") {
+    } else if (
+      e.target.id === "four" ||
+      e.keyCode === 52 ||
+      e.keyCode === 100
+    ) {
       // FOUR
 
       if (this.state.display.endsWith(" 0") === true) {
@@ -140,7 +162,11 @@ class App extends React.Component {
           display: "4",
         });
       }
-    } else if (e.target.id === "five") {
+    } else if (
+      e.target.id === "five" ||
+      e.keyCode === 53 ||
+      e.keyCode === 101
+    ) {
       // FIVE
 
       if (this.state.display.endsWith(" 0") === true) {
@@ -157,7 +183,7 @@ class App extends React.Component {
           display: "5",
         });
       }
-    } else if (e.target.id === "six") {
+    } else if (e.target.id === "six" || e.keyCode === 54 || e.keyCode === 102) {
       // SIX
 
       if (this.state.display.endsWith(" 0") === true) {
@@ -174,7 +200,11 @@ class App extends React.Component {
           display: "6",
         });
       }
-    } else if (e.target.id === "seven") {
+    } else if (
+      e.target.id === "seven" ||
+      e.keyCode === 55 ||
+      e.keyCode === 103
+    ) {
       // SEVEN
 
       if (this.state.display.endsWith(" 0") === true) {
@@ -191,7 +221,11 @@ class App extends React.Component {
           display: "7",
         });
       }
-    } else if (e.target.id === "eight") {
+    } else if (
+      e.target.id === "eight" ||
+      (e.shiftKey === false && e.keyCode === 56) ||
+      e.keyCode === 104
+    ) {
       // EIGHT
 
       if (this.state.display.endsWith(" 0") === true) {
@@ -208,7 +242,11 @@ class App extends React.Component {
           display: "8",
         });
       }
-    } else if (e.target.id === "nine") {
+    } else if (
+      e.target.id === "nine" ||
+      e.keyCode === 57 ||
+      e.keyCode === 105
+    ) {
       // NINE
 
       if (this.state.display.endsWith(" 0") === true) {
@@ -225,7 +263,11 @@ class App extends React.Component {
           display: "9",
         });
       }
-    } else if (e.target.id === "add") {
+    } else if (
+      e.target.id === "add" ||
+      (e.shiftKey === true && e.keyCode === 187) ||
+      e.keyCode === 107
+    ) {
       if (
         this.state.display.endsWith(" +  - ") === true ||
         this.state.display.endsWith(" -  - ") === true ||
@@ -244,7 +286,11 @@ class App extends React.Component {
           display: prevState.display.toString() + " + ", // otherwise just add the operator
         }));
       }
-    } else if (e.target.id === "subtract") {
+    } else if (
+      e.target.id === "subtract" ||
+      e.keyCode === 189 ||
+      e.keyCode === 109
+    ) {
       // IF THE LAST TWO CHARACTERS ARE "- ", then do nothing, otherwise add the " - "
       if (
         this.state.display.endsWith(" +  - ") === true ||
@@ -258,7 +304,11 @@ class App extends React.Component {
           display: prevState.display.toString() + " - ",
         }));
       }
-    } else if (e.target.id === "multiply") {
+    } else if (
+      e.target.id === "multiply" ||
+      (e.shiftKey === true && e.keyCode === 56) ||
+      e.keyCode === 106
+    ) {
       if (
         this.state.display.endsWith(" +  - ") === true ||
         this.state.display.endsWith(" -  - ") === true ||
@@ -276,8 +326,11 @@ class App extends React.Component {
           display: prevState.display.toString() + " * ",
         }));
       }
-    } else if (e.target.id === "divide") {
-      console.log(this.state.display);
+    } else if (
+      e.target.id === "divide" ||
+      e.keyCode === 191 ||
+      e.keyCode === 111
+    ) {
       // IF LAST CHARACTERS IN A STRING ARE " + - ", " - - ", " * - " or " / - ", then do nothing
       if (
         this.state.display.endsWith(" +  - ") === true ||
@@ -296,7 +349,11 @@ class App extends React.Component {
           display: prevState.display.toString() + " / ",
         }));
       }
-    } else if (e.target.id === "decimal") {
+    } else if (
+      e.target.id === "decimal" ||
+      e.keyCode === 110 ||
+      e.keyCode === 190
+    ) {
       let lastValue = this.state.display.split(" ").splice(-1).toString();
 
       if (lastValue.includes(".") === false) {
@@ -312,6 +369,16 @@ class App extends React.Component {
   // if last char is an operator followed by a decimal  (" ."), return or replace "." with "0"
 
   handleEval() {
+    // replace occurrences of " . " with " 0 ", allows calculator to evaluate expressions like 9 / . / . / . / .,
+    // if (this.state.display.includes(".")) {
+    // // const regexp = /\s\.\s|\s\./gi;
+    // // console.log(this.state.display.slice(-3));
+
+    // // this.setState((prevState) => ({
+    // //   display: prevState.display.replace(regexp, " 0 "),
+    // // }));
+    // }
+
     if (this.state.display.endsWith(" .") || this.state.display === "-") {
       let sliced = this.state.display.slice(0, -1);
       this.setState({
@@ -389,6 +456,10 @@ class App extends React.Component {
         <button id="clear" onClick={this.handleClear}>
           AC
         </button>
+        <p>
+          The keyboard shortcut for AC/Clear is shift + backspace.<br></br> The
+          rest of the keyboard controls are standard
+        </p>
       </div>
     );
   }
