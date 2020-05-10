@@ -21,6 +21,10 @@ class App extends React.Component {
   // LIKELY TO RUN INTO SIMILAR PROBLEMS WHEN THE FIRST RESULT IS CALCULATED BECAUSE DISPLAY BECOMES A NUMBER
   // NEED TO RUN EVAL ON DISPLAY THEN CONVERT IT BACK TO A STRING BEFORE VALUE IS PUT BACK IN DISPLAY
 
+  // When the decimal element is clicked, a "." should append to the currently displayed value; two "." in one number should not be accepted
+  // If 2 or more operators are entered consecutively, the operation performed should be the last operator entered (excluding the negative (-) sign.
+  // so, if the last char is " ", indicating an operator is the last character in the sequence, slice off the last two characters and add the new operator
+
   handleNum(e) {
     console.log(e.target.id); // gets the id of the clicked button
 
@@ -191,34 +195,47 @@ class App extends React.Component {
           display: "9",
         });
       }
-    } else if (
-      e.target.id === "add" &&
-      this.state.display.endsWith(" ") === false // if last character is not " "...
-    ) {
-      this.setState((prevState) => ({
-        display: prevState.display.toString() + " + ",
-      }));
-    } else if (
-      e.target.id === "subtract" &&
-      this.state.display.endsWith(" ") === false
-    ) {
-      this.setState((prevState) => ({
-        display: prevState.display.toString() + " - ",
-      }));
-    } else if (
-      e.target.id === "multiply" &&
-      this.state.display.endsWith(" ") === false
-    ) {
-      this.setState((prevState) => ({
-        display: prevState.display.toString() + " * ",
-      }));
-    } else if (
-      e.target.id === "divide" &&
-      this.state.display.endsWith(" ") === false
-    ) {
-      this.setState((prevState) => ({
-        display: prevState.display.toString() + " / ",
-      }));
+    } else if (e.target.id === "add") {
+      if (this.state.display.endsWith(" ") === true) {
+        // if the string ends with an operator and a " "
+        let sliced = this.state.display.slice(0, -3); // delete the last 3 characters and add the new operator
+        this.setState({
+          display: sliced + " + ",
+        });
+      } else if (this.state.display.endsWith(" ") === false) {
+        this.setState((prevState) => ({
+          display: prevState.display.toString() + " + ", // otherwise just add the operator
+        }));
+      }
+    } else if (e.target.id === "subtract") {
+      // IF THE LAST TWO CHARACTERS ARE "- ", then do nothing, otherwise add the " - "
+      if (this.state.display.endsWith("- ") === false) {
+        this.setState((prevState) => ({
+          display: prevState.display.toString() + " - ",
+        }));
+      }
+    } else if (e.target.id === "multiply") {
+      if (this.state.display.endsWith(" ") === true) {
+        let sliced = this.state.display.slice(0, -3);
+        this.setState({
+          display: sliced + " * ",
+        });
+      } else if (this.state.display.endsWith(" ") === false) {
+        this.setState((prevState) => ({
+          display: prevState.display.toString() + " * ",
+        }));
+      }
+    } else if (e.target.id === "divide") {
+      if (this.state.display.endsWith(" ") === true) {
+        let sliced = this.state.display.slice(0, -3);
+        this.setState({
+          display: sliced + " / ",
+        });
+      } else if (this.state.display.endsWith(" ") === false) {
+        this.setState((prevState) => ({
+          display: prevState.display.toString() + " / ",
+        }));
+      }
     } else if (
       e.target.id === "decimal"
       // &&
