@@ -26,6 +26,9 @@ class App extends React.Component {
   // so, if the last char is " ", indicating an operator is the last character in the sequence, slice off the last two characters and add the new operator
 
   handleNum(e) {
+    if (this.state.display === "Infinity" || this.state.display === "NaN") {
+      this.setState({ display: "" });
+    }
     console.log(e.target.id); // gets the id of the clicked button
 
     if (e.target.id === "zero") {
@@ -196,7 +199,14 @@ class App extends React.Component {
         });
       }
     } else if (e.target.id === "add") {
-      if (this.state.display.endsWith(" ") === true) {
+      if (
+        this.state.display.endsWith(" +  - ") === true ||
+        this.state.display.endsWith(" -  - ") === true ||
+        this.state.display.endsWith(" *  - ") === true ||
+        this.state.display.endsWith(" /  - ") === true
+      ) {
+        return;
+      } else if (this.state.display.endsWith(" ") === true) {
         // if the string ends with an operator and a " "
         let sliced = this.state.display.slice(0, -3); // delete the last 3 characters and add the new operator
         this.setState({
@@ -209,13 +219,27 @@ class App extends React.Component {
       }
     } else if (e.target.id === "subtract") {
       // IF THE LAST TWO CHARACTERS ARE "- ", then do nothing, otherwise add the " - "
-      if (this.state.display.endsWith("- ") === false) {
+      if (
+        this.state.display.endsWith(" +  - ") === true ||
+        this.state.display.endsWith(" -  - ") === true ||
+        this.state.display.endsWith(" *  - ") === true ||
+        this.state.display.endsWith(" /  - ") === true
+      ) {
+        return;
+      } else if (this.state.display.endsWith("- ") === false) {
         this.setState((prevState) => ({
           display: prevState.display.toString() + " - ",
         }));
       }
     } else if (e.target.id === "multiply") {
-      if (this.state.display.endsWith(" ") === true) {
+      if (
+        this.state.display.endsWith(" +  - ") === true ||
+        this.state.display.endsWith(" -  - ") === true ||
+        this.state.display.endsWith(" *  - ") === true ||
+        this.state.display.endsWith(" /  - ") === true
+      ) {
+        return;
+      } else if (this.state.display.endsWith(" ") === true) {
         let sliced = this.state.display.slice(0, -3);
         this.setState({
           display: sliced + " * ",
@@ -226,7 +250,16 @@ class App extends React.Component {
         }));
       }
     } else if (e.target.id === "divide") {
-      if (this.state.display.endsWith(" ") === true) {
+      console.log(this.state.display);
+      // IF LAST CHARACTERS IN A STRING ARE " + - ", " - - ", " * - " or " / - ", then do nothing
+      if (
+        this.state.display.endsWith(" +  - ") === true ||
+        this.state.display.endsWith(" -  - ") === true ||
+        this.state.display.endsWith(" *  - ") === true ||
+        this.state.display.endsWith(" /  - ") === true
+      ) {
+        return;
+      } else if (this.state.display.endsWith(" ") === true) {
         let sliced = this.state.display.slice(0, -3);
         this.setState({
           display: sliced + " / ",
@@ -247,16 +280,26 @@ class App extends React.Component {
     }
   }
 
-  // IF LAST CHARACTER OF DISPLAY WAS NOT " ", (which means an operator came before),
-  // then add it, otherwise not
+  // EQUALS ONCLICK
+  // if last character in string is " " (meaning string ends with operator),
+  // setstate - add "0" to the end, then evaluate
 
-  handleEval(err) {
-    let result = eval(this.state.display);
-    console.log(result);
-    if (typeof result === "number") {
-      this.setState({
-        display: eval(this.state.display).toString(),
-      });
+  handleEval() {
+    if (this.state.display.endsWith(" ") === true) {
+      return;
+      // this.setState((prevState) => ({
+      //   display: eval(this.state.display + " 0").toString(),
+      //   // display: prevState.display.toString() + " 0",
+      // }));
+      // FIRST DO THIS, THEN EVAL
+    } else {
+      let result = eval(this.state.display);
+      console.log(result);
+      if (typeof result === "number") {
+        this.setState({
+          display: eval(this.state.display).toString(),
+        });
+      }
     }
 
     // console.log(eval(this.state.display));
@@ -315,6 +358,7 @@ class App extends React.Component {
         <button id="decimal" onClick={this.handleNum}>
           .
         </button>
+        <button id="backspace">backspace</button>
         <button id="clear" onClick={this.handleClear}>
           AC
         </button>
@@ -327,10 +371,8 @@ export default App;
 
 // ADDITIONAL:
 // ADD KEY PRESS
+// ADD DELETE KEY
+// DO SOMETHING IF ERROR
 
 // LOOK MORE INTO ERROR BOUNDARIES
 // https://reactjs.org/docs/error-boundaries.html
-
-// handling zeros
-
-// if last two characters are " 0", then overwrite the last character with "1" or whatever other number
