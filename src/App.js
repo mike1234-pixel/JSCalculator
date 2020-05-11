@@ -1,7 +1,5 @@
 import React from "react";
 
-// PREMIUM, BLACK AND WHITE GLOSSY FEEL
-
 class App extends React.Component {
   constructor() {
     super();
@@ -441,68 +439,144 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>HELLO CALCULATOR WORLD</p>
-        <div id="last-sum">{this.state.lastSum}</div>
-        <div id="display">{this.state.display}</div>
-        <button id="equals" className="button" onClick={this.handleEval}>
-          =
-        </button>
-        <button id="zero" className="button" onClick={this.handleNum}>
-          0
-        </button>
-        <button id="one" className="1 button" onClick={this.handleNum}>
-          1
-        </button>
-        <button id="two" className="button" onClick={this.handleNum}>
-          2
-        </button>
-        <button id="three" className="button" onClick={this.handleNum}>
-          3
-        </button>
-        <button id="four" className="button" onClick={this.handleNum}>
-          4
-        </button>
-        <button id="five" className="button" onClick={this.handleNum}>
-          5
-        </button>
-        <button id="six" className="button" onClick={this.handleNum}>
-          6
-        </button>
-        <button id="seven" className="button" onClick={this.handleNum}>
-          7
-        </button>
-        <button id="eight" className="button" onClick={this.handleNum}>
-          8
-        </button>
-        <button id="nine" className="button" onClick={this.handleNum}>
-          9
-        </button>
-        <button id="add" className="button" onClick={this.handleNum}>
-          +
-        </button>
-        <button id="subtract" className="button" onClick={this.handleNum}>
-          -
-        </button>
-        <button id="multiply" className="button" onClick={this.handleNum}>
-          x
-        </button>
-        <button id="divide" className="button" onClick={this.handleNum}>
-          ÷
-        </button>
-        <button id="decimal" className="button" onClick={this.handleNum}>
-          .
-        </button>
-        <button
-          id="backspace"
-          className="button"
-          onClick={this.handleBackspace}
-        >
-          backspace
-        </button>
-        <button id="clear" onClick={this.handleClear}>
-          AC
-        </button>
+      <div className="app">
+        <p className="heading">HELLO CALCULATOR WORLD</p>
+        <div className="calc-container">
+          <div className="calc-top"></div>
+          <div className="calc-sub-display">
+            <div id="last-sum">{this.state.lastSum}</div>
+          </div>
+          <div className="calc-main-display">
+            <div id="display">{this.state.display}</div>
+          </div>
+          <button
+            id="equals"
+            className="button button__equals"
+            onClick={this.handleEval}
+          >
+            =
+          </button>
+          <button
+            id="zero"
+            className="button button__zero"
+            onClick={this.handleNum}
+          >
+            0
+          </button>
+          <button
+            id="one"
+            className="1 button button__one"
+            onClick={this.handleNum}
+          >
+            1
+          </button>
+          <button
+            id="two"
+            className="button button__two"
+            onClick={this.handleNum}
+          >
+            2
+          </button>
+          <button
+            id="three"
+            className="button button__three"
+            onClick={this.handleNum}
+          >
+            3
+          </button>
+          <button
+            id="four"
+            className="button button__four"
+            onClick={this.handleNum}
+          >
+            4
+          </button>
+          <button
+            id="five"
+            className="button button__five"
+            onClick={this.handleNum}
+          >
+            5
+          </button>
+          <button
+            id="six"
+            className="button button__six"
+            onClick={this.handleNum}
+          >
+            6
+          </button>
+          <button
+            id="seven"
+            className="button button__seven"
+            onClick={this.handleNum}
+          >
+            7
+          </button>
+          <button
+            id="eight"
+            className="button button__eight"
+            onClick={this.handleNum}
+          >
+            8
+          </button>
+          <button
+            id="nine"
+            className="button button__nine"
+            onClick={this.handleNum}
+          >
+            9
+          </button>
+          <button
+            id="add"
+            className="button button__add"
+            onClick={this.handleNum}
+          >
+            +
+          </button>
+          <button
+            id="subtract"
+            className="button button__subtract"
+            onClick={this.handleNum}
+          >
+            -
+          </button>
+          <button
+            id="multiply"
+            className="button button__multiply"
+            onClick={this.handleNum}
+          >
+            x
+          </button>
+          <button
+            id="divide"
+            className="button button__divide"
+            onClick={this.handleNum}
+          >
+            ÷
+          </button>
+          <button
+            id="decimal"
+            className="button button__decimal"
+            onClick={this.handleNum}
+          >
+            .
+          </button>
+          <button
+            id="backspace"
+            className="button button__backspace"
+            onClick={this.handleBackspace}
+          >
+            backspace
+          </button>
+          <button
+            id="clear"
+            className="button__clear"
+            onClick={this.handleClear}
+          >
+            AC
+          </button>
+          <div className="calc-bottom"></div>
+        </div>
         <p>
           The keyboard shortcut for AC/Clear is shift + backspace.<br></br> The
           rest of the keyboard controls are standard
