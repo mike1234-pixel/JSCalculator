@@ -572,7 +572,7 @@ class App extends React.Component {
           </button>
           <button
             id="clear"
-            className="button__clear"
+            className="button button__clear"
             onClick={this.handleClear}
           >
             AC

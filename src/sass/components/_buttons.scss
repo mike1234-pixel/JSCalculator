@@ -1,0 +1,12 @@
+.button {
+  background-color: black;
+  color: #fff;
+  border-color: #313639;
+
+  &__clear {
+    border-bottom: 2px solid #313639;
+  }
+  &__backspace {
+    border-bottom: 2px solid #313639;
+  }
+}
