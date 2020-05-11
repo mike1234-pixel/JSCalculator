@@ -440,7 +440,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <p className="heading">HELLO CALCULATOR WORLD</p>
+        <div className="app-container__heading">
+          <p className="heading">JavaScript Calculator</p>
+        </div>
         <div className="calc-container">
           <div className="calc-top"></div>
           <div className="calc-sub-display">
@@ -577,10 +579,10 @@ class App extends React.Component {
           </button>
           <div className="calc-bottom"></div>
         </div>
-        <p>
-          The keyboard shortcut for AC/Clear is shift + backspace.<br></br> The
-          rest of the keyboard controls are standard
-        </p>
+        <div className="app-container__text">
+          <p>The keyboard shortcut for AC/Clear is shift + backspace.</p>
+          <p>The rest of the keyboard controls are standard</p>
+        </div>
       </div>
     );
   }

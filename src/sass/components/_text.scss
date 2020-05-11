@@ -1,0 +1,14 @@
+.app-container {
+  &__heading {
+    text-align: center;
+    .heading {
+      color: blue;
+    }
+  }
+  &__text {
+    text-align: center;
+    p {
+      color: purple;
+    }
+  }
+}
