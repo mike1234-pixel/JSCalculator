@@ -75,6 +75,17 @@ class App extends React.Component {
 
   componentDidMount() {
     document.addEventListener("keydown", (e) => {
+      if (
+        this.state.lastSum.includes("+") ||
+        this.state.lastSum.includes("-") ||
+        this.state.lastSum.includes("/") ||
+        this.state.lastSum.includes("*")
+      ) {
+        let displayValue = this.state.display;
+        this.setState({
+          lastSum: "Ans: " + displayValue,
+        });
+      }
       if ((e.shiftKey === false && e.keyCode === 187) || e.keyCode === 13) {
         this.handleEval();
       } else if (e.shiftKey === true && e.keyCode === 8) {
