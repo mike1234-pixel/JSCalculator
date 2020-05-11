@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/JSCalculator/static/js/main.a84d7476.chunk.js",
-    "main.js.map": "/JSCalculator/static/js/main.a84d7476.chunk.js.map",
+    "main.js": "/JSCalculator/static/js/main.418dd8b7.chunk.js",
+    "main.js.map": "/JSCalculator/static/js/main.418dd8b7.chunk.js.map",
     "runtime-main.js": "/JSCalculator/static/js/runtime-main.65a589f7.js",
     "runtime-main.js.map": "/JSCalculator/static/js/runtime-main.65a589f7.js.map",
     "static/js/2.7d834129.chunk.js": "/JSCalculator/static/js/2.7d834129.chunk.js",
     "static/js/2.7d834129.chunk.js.map": "/JSCalculator/static/js/2.7d834129.chunk.js.map",
     "index.html": "/JSCalculator/index.html",
-    "precache-manifest.b1ae457d9335f847ce077978f9f1a11e.js": "/JSCalculator/precache-manifest.b1ae457d9335f847ce077978f9f1a11e.js",
+    "precache-manifest.187e20c12a5d95e4b0e0bd195ab7411a.js": "/JSCalculator/precache-manifest.187e20c12a5d95e4b0e0bd195ab7411a.js",
     "service-worker.js": "/JSCalculator/service-worker.js",
     "static/js/2.7d834129.chunk.js.LICENSE.txt": "/JSCalculator/static/js/2.7d834129.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.65a589f7.js",
     "static/js/2.7d834129.chunk.js",
-    "static/js/main.a84d7476.chunk.js"
+    "static/js/main.418dd8b7.chunk.js"
   ]
 }
