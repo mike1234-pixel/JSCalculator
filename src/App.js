@@ -1,10 +1,13 @@
 import React from "react";
 
+// PREMIUM, BLACK AND WHITE GLOSSY FEEL
+
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
       display: "0",
+      lastSum: "",
     };
     this.handleClear = this.handleClear.bind(this);
     this.handleNum = this.handleNum.bind(this);
@@ -13,7 +16,7 @@ class App extends React.Component {
   }
 
   handleClear() {
-    this.setState({ display: "0" });
+    this.setState({ display: "0", lastSum: "" });
   }
 
   handleBackspace() {
@@ -47,6 +50,24 @@ class App extends React.Component {
         display: sliced,
       });
     }
+  }
+
+  componentDidUpdate() {
+    document.querySelectorAll(".button").forEach((item) => {
+      item.addEventListener("click", (event) => {
+        if (
+          this.state.lastSum.includes("+") ||
+          this.state.lastSum.includes("-") ||
+          this.state.lastSum.includes("/") ||
+          this.state.lastSum.includes("*")
+        ) {
+          let displayValue = this.state.display;
+          this.setState({
+            lastSum: "Ans: " + displayValue,
+          });
+        }
+      });
+    });
   }
 
   componentDidMount() {
@@ -369,16 +390,11 @@ class App extends React.Component {
   // if last char is an operator followed by a decimal  (" ."), return or replace "." with "0"
 
   handleEval() {
-    // replace occurrences of " . " with " 0 ", allows calculator to evaluate expressions like 9 / . / . / . / .,
-    // if (this.state.display.includes(".")) {
-    // // const regexp = /\s\.\s|\s\./gi;
-    // // console.log(this.state.display.slice(-3));
+    let displayValue = this.state.display;
 
-    // // this.setState((prevState) => ({
-    // //   display: prevState.display.replace(regexp, " 0 "),
-    // // }));
-    // }
-
+    this.setState({
+      lastSum: displayValue + " =",
+    });
     if (this.state.display.endsWith(" .") || this.state.display === "-") {
       let sliced = this.state.display.slice(0, -1);
       this.setState({
@@ -401,56 +417,61 @@ class App extends React.Component {
     return (
       <div>
         <p>HELLO CALCULATOR WORLD</p>
+        <div id="last-sum">{this.state.lastSum}</div>
         <div id="display">{this.state.display}</div>
-        <button id="equals" onClick={this.handleEval}>
+        <button id="equals" className="button" onClick={this.handleEval}>
           =
         </button>
-        <button id="zero" onClick={this.handleNum}>
+        <button id="zero" className="button" onClick={this.handleNum}>
           0
         </button>
-        <button id="one" className="1" onClick={this.handleNum}>
+        <button id="one" className="1 button" onClick={this.handleNum}>
           1
         </button>
-        <button id="two" onClick={this.handleNum}>
+        <button id="two" className="button" onClick={this.handleNum}>
           2
         </button>
-        <button id="three" onClick={this.handleNum}>
+        <button id="three" className="button" onClick={this.handleNum}>
           3
         </button>
-        <button id="four" onClick={this.handleNum}>
+        <button id="four" className="button" onClick={this.handleNum}>
           4
         </button>
-        <button id="five" onClick={this.handleNum}>
+        <button id="five" className="button" onClick={this.handleNum}>
           5
         </button>
-        <button id="six" onClick={this.handleNum}>
+        <button id="six" className="button" onClick={this.handleNum}>
           6
         </button>
-        <button id="seven" onClick={this.handleNum}>
+        <button id="seven" className="button" onClick={this.handleNum}>
           7
         </button>
-        <button id="eight" onClick={this.handleNum}>
+        <button id="eight" className="button" onClick={this.handleNum}>
           8
         </button>
-        <button id="nine" onClick={this.handleNum}>
+        <button id="nine" className="button" onClick={this.handleNum}>
           9
         </button>
-        <button id="add" onClick={this.handleNum}>
+        <button id="add" className="button" onClick={this.handleNum}>
           +
         </button>
-        <button id="subtract" onClick={this.handleNum}>
+        <button id="subtract" className="button" onClick={this.handleNum}>
           -
         </button>
-        <button id="multiply" onClick={this.handleNum}>
+        <button id="multiply" className="button" onClick={this.handleNum}>
           x
         </button>
-        <button id="divide" onClick={this.handleNum}>
+        <button id="divide" className="button" onClick={this.handleNum}>
           ÷
         </button>
-        <button id="decimal" onClick={this.handleNum}>
+        <button id="decimal" className="button" onClick={this.handleNum}>
           .
         </button>
-        <button id="backspace" onClick={this.handleBackspace}>
+        <button
+          id="backspace"
+          className="button"
+          onClick={this.handleBackspace}
+        >
           backspace
         </button>
         <button id="clear" onClick={this.handleClear}>
@@ -466,21 +487,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-// ADDITIONAL:
-// ADD KEY PRESS
-
-// DO SOMETHING IF ERROR
-
-// LOOK MORE INTO ERROR BOUNDARIES
-// https://reactjs.org/docs/error-boundaries.html
-
-// eval is risky only in server side javascript in scenarios like parsing user input
-// this opens the program up to injection attacks.
-// it can also create performance issues when compiled.
-// in this case eval is on the client, does not parse user input text and is being interpreted.
-
-// 5 * - + 5
-
-// minor issues
-// if 0. -- can't add any zeros after the decimal place
