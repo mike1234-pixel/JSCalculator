@@ -390,6 +390,14 @@ class App extends React.Component {
   // if last char is an operator followed by a decimal  (" ."), return or replace "." with "0"
 
   handleEval() {
+    try {
+      // Do something that could throw
+      eval(this.state.display);
+    } catch (error) {
+      console.log("error");
+      this.setState({ display: "Error. Please Reset." });
+    }
+
     let displayValue = this.state.display;
 
     this.setState({
