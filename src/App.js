@@ -20,7 +20,10 @@ class App extends React.Component {
   }
 
   handleBackspace() {
-    if (this.state.display === "0") {
+    if (
+      this.state.display === "0" ||
+      this.state.display === "Error. Please Reset."
+    ) {
       return;
     } else if (
       this.state.display === "1" ||
@@ -85,8 +88,12 @@ class App extends React.Component {
   }
 
   handleNum(e) {
-    if (this.state.display === "Infinity" || this.state.display === "NaN") {
-      this.setState({ display: "" });
+    if (
+      this.state.display === "Infinity" ||
+      this.state.display === "NaN" ||
+      this.state.display === "Error. Please Reset."
+    ) {
+      this.setState({ display: "", lastSum: "" });
     }
     console.log(e.target.id); // gets the id of the clicked button
 
@@ -391,7 +398,7 @@ class App extends React.Component {
 
   handleEval() {
     try {
-      // Do something that could throw
+      // Do something that could throw error
       eval(this.state.display);
     } catch (error) {
       console.log("error");
