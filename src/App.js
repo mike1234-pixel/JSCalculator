@@ -1,5 +1,7 @@
 import React from "react";
 
+// REMOVE ALL CONSOLE LOGS
+
 class App extends React.Component {
   constructor() {
     super();
@@ -104,8 +106,6 @@ class App extends React.Component {
     ) {
       this.setState({ display: "", lastSum: "" });
     }
-    console.log(e.target.id); // gets the id of the clicked button
-
     if (e.target.id === "zero" || e.keyCode === 48 || e.keyCode === 96) {
       let lastValue = this.state.display.split(" ").splice(-1).toString();
       if (
@@ -115,7 +115,6 @@ class App extends React.Component {
         this.state.display.endsWith(" ") ||
         lastValue.includes(".")
       ) {
-        console.log("pass");
         this.setState((prevState) => ({
           display: prevState.display.toString() + "0",
         }));
@@ -428,7 +427,7 @@ class App extends React.Component {
       return; // if statement ends with an operator, exit function
     } else {
       let result = eval(this.state.display);
-      console.log(result);
+
       if (typeof result === "number") {
         this.setState({
           display: eval(this.state.display).toString(),
@@ -580,8 +579,7 @@ class App extends React.Component {
           <div className="calc-bottom"></div>
         </div>
         <div className="app-container__text">
-          <p>The keyboard shortcut for AC/Clear is shift + backspace.</p>
-          <p>The rest of the keyboard controls are standard</p>
+          <p>Designed and built by Michael Tandy</p>
         </div>
       </div>
     );
