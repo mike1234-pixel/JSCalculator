@@ -8,6 +8,7 @@ class App extends React.Component {
     this.state = {
       display: "0",
       lastSum: "",
+      isRunning: false,
     };
     this.handleClear = this.handleClear.bind(this);
     this.handleNum = this.handleNum.bind(this);
@@ -99,307 +100,336 @@ class App extends React.Component {
   }
 
   handleNum(e) {
-    if (
-      this.state.display === "Infinity" ||
-      this.state.display === "NaN" ||
-      this.state.display === "Error. Please Reset."
-    ) {
-      this.setState({ display: "", lastSum: "" });
+    console.log("nice cold beer");
+    // if isRunning is true, exit function
+    // otherwise execute the function
+    if (this.state.isRunning === true) {
+      return;
+    } else {
+      if (this.state.isRunning === false) {
+        this.setState({
+          isRunning: true,
+        });
+      }
+
+      if (
+        this.state.display === "Infinity" ||
+        this.state.display === "NaN" ||
+        this.state.display === "Error. Please Reset."
+      ) {
+        this.setState({ display: "", lastSum: "" });
+      }
+      if (e.target.id === "zero" || e.keyCode === 48 || e.keyCode === 96) {
+        let lastValue = this.state.display.split(" ").splice(-1).toString();
+        if (
+          (this.state.display !== "0" &&
+            this.state.display.startsWith("0", 0) === false &&
+            this.state.display.endsWith(" 0") === false) ||
+          this.state.display.endsWith(" ") ||
+          lastValue.includes(".")
+        ) {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "0",
+          }));
+        }
+      } else if (
+        e.target.id === "one" ||
+        e.keyCode === 49 ||
+        e.keyCode === 97
+      ) {
+        // ONE
+        if (this.state.display.slice(-2) === " 0") {
+          // if string endsWith " 0", slice off last character and add zero
+          let sliced = this.state.display.slice(0, -1); // removes last char and returns rest of string
+          this.setState({
+            display: sliced + "1",
+          });
+        }
+        // if "display" is not 0 / starting value, concat 1 to the end of the string
+        else if (this.state.display !== "0") {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "1",
+          }));
+        } else if (this.state.display === "0") {
+          // if "display" is 0 / starting value, set "display" to "1"
+          this.setState({
+            display: "1",
+          });
+        }
+      } else if (
+        e.target.id === "two" ||
+        e.keyCode === 50 ||
+        e.keyCode === 98
+      ) {
+        // TWO
+
+        if (this.state.display.endsWith(" 0") === true) {
+          let sliced = this.state.display.slice(0, -1);
+          this.setState({
+            display: sliced + "2",
+          });
+        } else if (this.state.display !== "0") {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "2",
+          }));
+        } else if (this.state.display === "0") {
+          this.setState({
+            display: "2",
+          });
+        }
+      } else if (
+        e.target.id === "three" ||
+        e.keyCode === 51 ||
+        e.keyCode === 99
+      ) {
+        // THREE
+
+        if (this.state.display.endsWith(" 0") === true) {
+          let sliced = this.state.display.slice(0, -1);
+          this.setState({
+            display: sliced + "3",
+          });
+        } else if (this.state.display !== "0") {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "3",
+          }));
+        } else if (this.state.display === "0") {
+          this.setState({
+            display: "3",
+          });
+        }
+      } else if (
+        e.target.id === "four" ||
+        e.keyCode === 52 ||
+        e.keyCode === 100
+      ) {
+        // FOUR
+
+        if (this.state.display.endsWith(" 0") === true) {
+          let sliced = this.state.display.slice(0, -1);
+          this.setState({
+            display: sliced + "4",
+          });
+        } else if (this.state.display !== "0") {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "4",
+          }));
+        } else if (this.state.display === "0") {
+          this.setState({
+            display: "4",
+          });
+        }
+      } else if (
+        e.target.id === "five" ||
+        e.keyCode === 53 ||
+        e.keyCode === 101
+      ) {
+        // FIVE
+
+        if (this.state.display.endsWith(" 0") === true) {
+          let sliced = this.state.display.slice(0, -1);
+          this.setState({
+            display: sliced + "5",
+          });
+        } else if (this.state.display !== "0") {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "5",
+          }));
+        } else if (this.state.display === "0") {
+          this.setState({
+            display: "5",
+          });
+        }
+      } else if (
+        e.target.id === "six" ||
+        e.keyCode === 54 ||
+        e.keyCode === 102
+      ) {
+        // SIX
+
+        if (this.state.display.endsWith(" 0") === true) {
+          let sliced = this.state.display.slice(0, -1);
+          this.setState({
+            display: sliced + "6",
+          });
+        } else if (this.state.display !== "0") {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "6",
+          }));
+        } else if (this.state.display === "0") {
+          this.setState({
+            display: "6",
+          });
+        }
+      } else if (
+        e.target.id === "seven" ||
+        e.keyCode === 55 ||
+        e.keyCode === 103
+      ) {
+        // SEVEN
+
+        if (this.state.display.endsWith(" 0") === true) {
+          let sliced = this.state.display.slice(0, -1);
+          this.setState({
+            display: sliced + "7",
+          });
+        } else if (this.state.display !== "0") {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "7",
+          }));
+        } else if (this.state.display === "0") {
+          this.setState({
+            display: "7",
+          });
+        }
+      } else if (
+        e.target.id === "eight" ||
+        (e.shiftKey === false && e.keyCode === 56) ||
+        e.keyCode === 104
+      ) {
+        // EIGHT
+
+        if (this.state.display.endsWith(" 0") === true) {
+          let sliced = this.state.display.slice(0, -1);
+          this.setState({
+            display: sliced + "8",
+          });
+        } else if (this.state.display !== "0") {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "8",
+          }));
+        } else if (this.state.display === "0") {
+          this.setState({
+            display: "8",
+          });
+        }
+      } else if (
+        e.target.id === "nine" ||
+        e.keyCode === 57 ||
+        e.keyCode === 105
+      ) {
+        // NINE
+
+        if (this.state.display.endsWith(" 0") === true) {
+          let sliced = this.state.display.slice(0, -1);
+          this.setState({
+            display: sliced + "9",
+          });
+        } else if (this.state.display !== "0") {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + "9",
+          }));
+        } else if (this.state.display === "0") {
+          this.setState({
+            display: "9",
+          });
+        }
+      } else if (
+        e.target.id === "add" ||
+        (e.shiftKey === true && e.keyCode === 187) ||
+        e.keyCode === 107
+      ) {
+        if (
+          this.state.display.endsWith(" +  - ") === true ||
+          this.state.display.endsWith(" -  - ") === true ||
+          this.state.display.endsWith(" *  - ") === true ||
+          this.state.display.endsWith(" /  - ") === true
+        ) {
+          return;
+        } else if (this.state.display.endsWith(" ") === true) {
+          // if the string ends with an operator and a " "
+          let sliced = this.state.display.slice(0, -3); // delete the last 3 characters and add the new operator
+          this.setState({
+            display: sliced + " + ",
+          });
+        } else if (this.state.display.endsWith(" ") === false) {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + " + ", // otherwise just add the operator
+          }));
+        }
+      } else if (
+        e.target.id === "subtract" ||
+        e.keyCode === 189 ||
+        e.keyCode === 109
+      ) {
+        // IF THE LAST TWO CHARACTERS ARE "- ", then do nothing, otherwise add the " - "
+        if (
+          this.state.display.endsWith(" +  - ") === true ||
+          this.state.display.endsWith(" -  - ") === true ||
+          this.state.display.endsWith(" *  - ") === true ||
+          this.state.display.endsWith(" /  - ") === true
+        ) {
+          return;
+        } else if (this.state.display.endsWith("- ") === false) {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + " - ",
+          }));
+        }
+      } else if (
+        e.target.id === "multiply" ||
+        (e.shiftKey === true && e.keyCode === 56) ||
+        e.keyCode === 106
+      ) {
+        if (
+          this.state.display.endsWith(" +  - ") === true ||
+          this.state.display.endsWith(" -  - ") === true ||
+          this.state.display.endsWith(" *  - ") === true ||
+          this.state.display.endsWith(" /  - ") === true
+        ) {
+          return;
+        } else if (this.state.display.endsWith(" ") === true) {
+          let sliced = this.state.display.slice(0, -3);
+          this.setState({
+            display: sliced + " * ",
+          });
+        } else if (this.state.display.endsWith(" ") === false) {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + " * ",
+          }));
+        }
+      } else if (
+        e.target.id === "divide" ||
+        e.keyCode === 191 ||
+        e.keyCode === 111
+      ) {
+        // IF LAST CHARACTERS IN A STRING ARE " + - ", " - - ", " * - " or " / - ", then do nothing
+        if (
+          this.state.display.endsWith(" +  - ") === true ||
+          this.state.display.endsWith(" -  - ") === true ||
+          this.state.display.endsWith(" *  - ") === true ||
+          this.state.display.endsWith(" /  - ") === true
+        ) {
+          return;
+        } else if (this.state.display.endsWith(" ") === true) {
+          let sliced = this.state.display.slice(0, -3);
+          this.setState({
+            display: sliced + " / ",
+          });
+        } else if (this.state.display.endsWith(" ") === false) {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + " / ",
+          }));
+        }
+      } else if (
+        e.target.id === "decimal" ||
+        e.keyCode === 110 ||
+        e.keyCode === 190
+      ) {
+        let lastValue = this.state.display.split(" ").splice(-1).toString();
+
+        if (lastValue.includes(".") === false) {
+          this.setState((prevState) => ({
+            display: prevState.display.toString() + ".",
+          }));
+        } else {
+          return;
+        }
+      }
     }
-    if (e.target.id === "zero" || e.keyCode === 48 || e.keyCode === 96) {
-      let lastValue = this.state.display.split(" ").splice(-1).toString();
-      if (
-        (this.state.display !== "0" &&
-          this.state.display.startsWith("0", 0) === false &&
-          this.state.display.endsWith(" 0") === false) ||
-        this.state.display.endsWith(" ") ||
-        lastValue.includes(".")
-      ) {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "0",
-        }));
-      }
-    } else if (e.target.id === "one" || e.keyCode === 49 || e.keyCode === 97) {
-      // ONE
-      if (this.state.display.slice(-2) === " 0") {
-        // if string endsWith " 0", slice off last character and add zero
-        let sliced = this.state.display.slice(0, -1); // removes last char and returns rest of string
-        this.setState({
-          display: sliced + "1",
-        });
-      }
-      // if "display" is not 0 / starting value, concat 1 to the end of the string
-      else if (this.state.display !== "0") {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "1",
-        }));
-      } else if (this.state.display === "0") {
-        // if "display" is 0 / starting value, set "display" to "1"
-        this.setState({
-          display: "1",
-        });
-      }
-    } else if (e.target.id === "two" || e.keyCode === 50 || e.keyCode === 98) {
-      // TWO
-
-      if (this.state.display.endsWith(" 0") === true) {
-        let sliced = this.state.display.slice(0, -1);
-        this.setState({
-          display: sliced + "2",
-        });
-      } else if (this.state.display !== "0") {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "2",
-        }));
-      } else if (this.state.display === "0") {
-        this.setState({
-          display: "2",
-        });
-      }
-    } else if (
-      e.target.id === "three" ||
-      e.keyCode === 51 ||
-      e.keyCode === 99
-    ) {
-      // THREE
-
-      if (this.state.display.endsWith(" 0") === true) {
-        let sliced = this.state.display.slice(0, -1);
-        this.setState({
-          display: sliced + "3",
-        });
-      } else if (this.state.display !== "0") {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "3",
-        }));
-      } else if (this.state.display === "0") {
-        this.setState({
-          display: "3",
-        });
-      }
-    } else if (
-      e.target.id === "four" ||
-      e.keyCode === 52 ||
-      e.keyCode === 100
-    ) {
-      // FOUR
-
-      if (this.state.display.endsWith(" 0") === true) {
-        let sliced = this.state.display.slice(0, -1);
-        this.setState({
-          display: sliced + "4",
-        });
-      } else if (this.state.display !== "0") {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "4",
-        }));
-      } else if (this.state.display === "0") {
-        this.setState({
-          display: "4",
-        });
-      }
-    } else if (
-      e.target.id === "five" ||
-      e.keyCode === 53 ||
-      e.keyCode === 101
-    ) {
-      // FIVE
-
-      if (this.state.display.endsWith(" 0") === true) {
-        let sliced = this.state.display.slice(0, -1);
-        this.setState({
-          display: sliced + "5",
-        });
-      } else if (this.state.display !== "0") {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "5",
-        }));
-      } else if (this.state.display === "0") {
-        this.setState({
-          display: "5",
-        });
-      }
-    } else if (e.target.id === "six" || e.keyCode === 54 || e.keyCode === 102) {
-      // SIX
-
-      if (this.state.display.endsWith(" 0") === true) {
-        let sliced = this.state.display.slice(0, -1);
-        this.setState({
-          display: sliced + "6",
-        });
-      } else if (this.state.display !== "0") {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "6",
-        }));
-      } else if (this.state.display === "0") {
-        this.setState({
-          display: "6",
-        });
-      }
-    } else if (
-      e.target.id === "seven" ||
-      e.keyCode === 55 ||
-      e.keyCode === 103
-    ) {
-      // SEVEN
-
-      if (this.state.display.endsWith(" 0") === true) {
-        let sliced = this.state.display.slice(0, -1);
-        this.setState({
-          display: sliced + "7",
-        });
-      } else if (this.state.display !== "0") {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "7",
-        }));
-      } else if (this.state.display === "0") {
-        this.setState({
-          display: "7",
-        });
-      }
-    } else if (
-      e.target.id === "eight" ||
-      (e.shiftKey === false && e.keyCode === 56) ||
-      e.keyCode === 104
-    ) {
-      // EIGHT
-
-      if (this.state.display.endsWith(" 0") === true) {
-        let sliced = this.state.display.slice(0, -1);
-        this.setState({
-          display: sliced + "8",
-        });
-      } else if (this.state.display !== "0") {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "8",
-        }));
-      } else if (this.state.display === "0") {
-        this.setState({
-          display: "8",
-        });
-      }
-    } else if (
-      e.target.id === "nine" ||
-      e.keyCode === 57 ||
-      e.keyCode === 105
-    ) {
-      // NINE
-
-      if (this.state.display.endsWith(" 0") === true) {
-        let sliced = this.state.display.slice(0, -1);
-        this.setState({
-          display: sliced + "9",
-        });
-      } else if (this.state.display !== "0") {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + "9",
-        }));
-      } else if (this.state.display === "0") {
-        this.setState({
-          display: "9",
-        });
-      }
-    } else if (
-      e.target.id === "add" ||
-      (e.shiftKey === true && e.keyCode === 187) ||
-      e.keyCode === 107
-    ) {
-      if (
-        this.state.display.endsWith(" +  - ") === true ||
-        this.state.display.endsWith(" -  - ") === true ||
-        this.state.display.endsWith(" *  - ") === true ||
-        this.state.display.endsWith(" /  - ") === true
-      ) {
-        return;
-      } else if (this.state.display.endsWith(" ") === true) {
-        // if the string ends with an operator and a " "
-        let sliced = this.state.display.slice(0, -3); // delete the last 3 characters and add the new operator
-        this.setState({
-          display: sliced + " + ",
-        });
-      } else if (this.state.display.endsWith(" ") === false) {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + " + ", // otherwise just add the operator
-        }));
-      }
-    } else if (
-      e.target.id === "subtract" ||
-      e.keyCode === 189 ||
-      e.keyCode === 109
-    ) {
-      // IF THE LAST TWO CHARACTERS ARE "- ", then do nothing, otherwise add the " - "
-      if (
-        this.state.display.endsWith(" +  - ") === true ||
-        this.state.display.endsWith(" -  - ") === true ||
-        this.state.display.endsWith(" *  - ") === true ||
-        this.state.display.endsWith(" /  - ") === true
-      ) {
-        return;
-      } else if (this.state.display.endsWith("- ") === false) {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + " - ",
-        }));
-      }
-    } else if (
-      e.target.id === "multiply" ||
-      (e.shiftKey === true && e.keyCode === 56) ||
-      e.keyCode === 106
-    ) {
-      if (
-        this.state.display.endsWith(" +  - ") === true ||
-        this.state.display.endsWith(" -  - ") === true ||
-        this.state.display.endsWith(" *  - ") === true ||
-        this.state.display.endsWith(" /  - ") === true
-      ) {
-        return;
-      } else if (this.state.display.endsWith(" ") === true) {
-        let sliced = this.state.display.slice(0, -3);
-        this.setState({
-          display: sliced + " * ",
-        });
-      } else if (this.state.display.endsWith(" ") === false) {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + " * ",
-        }));
-      }
-    } else if (
-      e.target.id === "divide" ||
-      e.keyCode === 191 ||
-      e.keyCode === 111
-    ) {
-      // IF LAST CHARACTERS IN A STRING ARE " + - ", " - - ", " * - " or " / - ", then do nothing
-      if (
-        this.state.display.endsWith(" +  - ") === true ||
-        this.state.display.endsWith(" -  - ") === true ||
-        this.state.display.endsWith(" *  - ") === true ||
-        this.state.display.endsWith(" /  - ") === true
-      ) {
-        return;
-      } else if (this.state.display.endsWith(" ") === true) {
-        let sliced = this.state.display.slice(0, -3);
-        this.setState({
-          display: sliced + " / ",
-        });
-      } else if (this.state.display.endsWith(" ") === false) {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + " / ",
-        }));
-      }
-    } else if (
-      e.target.id === "decimal" ||
-      e.keyCode === 110 ||
-      e.keyCode === 190
-    ) {
-      let lastValue = this.state.display.split(" ").splice(-1).toString();
-
-      if (lastValue.includes(".") === false) {
-        this.setState((prevState) => ({
-          display: prevState.display.toString() + ".",
-        }));
-      } else {
-        return;
-      }
-    }
+    // set state isRunning back to false and exit
+    this.setState({
+      isRunning: false,
+    });
   }
 
   // if last char is an operator followed by a decimal  (" ."), return or replace "." with "0"
@@ -407,32 +437,30 @@ class App extends React.Component {
   handleEval() {
     try {
       // Do something that could throw error
-      eval(this.state.display);
+      let displayValue = this.state.display;
+
+      this.setState({
+        lastSum: displayValue + " =",
+      });
+      if (this.state.display.endsWith(" .") || this.state.display === "-") {
+        let sliced = this.state.display.slice(0, -1);
+        this.setState({
+          display: eval(sliced + "0").toString(), // if last char is an operator followed by a decimal  (" ."), convert to "0", then evaluate
+        });
+      } else if (this.state.display.endsWith(" ") === true) {
+        return; // if statement ends with an operator, exit function
+      } else {
+        let result = eval(this.state.display);
+
+        if (typeof result === "number") {
+          this.setState({
+            display: eval(this.state.display).toString(),
+          });
+        }
+      }
     } catch (error) {
       console.log("error");
       this.setState({ display: "Error. Please Reset." });
-    }
-
-    let displayValue = this.state.display;
-
-    this.setState({
-      lastSum: displayValue + " =",
-    });
-    if (this.state.display.endsWith(" .") || this.state.display === "-") {
-      let sliced = this.state.display.slice(0, -1);
-      this.setState({
-        display: eval(sliced + "0").toString(), // if last char is an operator followed by a decimal  (" ."), convert to "0", then evaluate
-      });
-    } else if (this.state.display.endsWith(" ") === true) {
-      return; // if statement ends with an operator, exit function
-    } else {
-      let result = eval(this.state.display);
-
-      if (typeof result === "number") {
-        this.setState({
-          display: eval(this.state.display).toString(),
-        });
-      }
     }
   }
 
