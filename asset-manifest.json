@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/JSCalculator/static/css/main.7ebbb805.chunk.css",
-    "main.js": "/JSCalculator/static/js/main.acc46473.chunk.js",
-    "main.js.map": "/JSCalculator/static/js/main.acc46473.chunk.js.map",
-    "runtime-main.js": "/JSCalculator/static/js/runtime-main.65a589f7.js",
-    "runtime-main.js.map": "/JSCalculator/static/js/runtime-main.65a589f7.js.map",
-    "static/js/2.7d834129.chunk.js": "/JSCalculator/static/js/2.7d834129.chunk.js",
-    "static/js/2.7d834129.chunk.js.map": "/JSCalculator/static/js/2.7d834129.chunk.js.map",
-    "index.html": "/JSCalculator/index.html",
-    "precache-manifest.b9ca311b44e83a8edb78de83dbab41e7.js": "/JSCalculator/precache-manifest.b9ca311b44e83a8edb78de83dbab41e7.js",
-    "service-worker.js": "/JSCalculator/service-worker.js",
-    "static/css/main.7ebbb805.chunk.css.map": "/JSCalculator/static/css/main.7ebbb805.chunk.css.map",
-    "static/js/2.7d834129.chunk.js.LICENSE.txt": "/JSCalculator/static/js/2.7d834129.chunk.js.LICENSE.txt"
+    "main.css": "/fcc-frontend-libraries-project-four/static/css/main.7ebbb805.chunk.css",
+    "main.js": "/fcc-frontend-libraries-project-four/static/js/main.ba682cdb.chunk.js",
+    "main.js.map": "/fcc-frontend-libraries-project-four/static/js/main.ba682cdb.chunk.js.map",
+    "runtime-main.js": "/fcc-frontend-libraries-project-four/static/js/runtime-main.5495ccd2.js",
+    "runtime-main.js.map": "/fcc-frontend-libraries-project-four/static/js/runtime-main.5495ccd2.js.map",
+    "static/js/2.7d834129.chunk.js": "/fcc-frontend-libraries-project-four/static/js/2.7d834129.chunk.js",
+    "static/js/2.7d834129.chunk.js.map": "/fcc-frontend-libraries-project-four/static/js/2.7d834129.chunk.js.map",
+    "index.html": "/fcc-frontend-libraries-project-four/index.html",
+    "precache-manifest.c0dcea8d0e989dee28c19f92b50254a6.js": "/fcc-frontend-libraries-project-four/precache-manifest.c0dcea8d0e989dee28c19f92b50254a6.js",
+    "service-worker.js": "/fcc-frontend-libraries-project-four/service-worker.js",
+    "static/css/main.7ebbb805.chunk.css.map": "/fcc-frontend-libraries-project-four/static/css/main.7ebbb805.chunk.css.map",
+    "static/js/2.7d834129.chunk.js.LICENSE.txt": "/fcc-frontend-libraries-project-four/static/js/2.7d834129.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.65a589f7.js",
+    "static/js/runtime-main.5495ccd2.js",
     "static/js/2.7d834129.chunk.js",
     "static/css/main.7ebbb805.chunk.css",
-    "static/js/main.acc46473.chunk.js"
+    "static/js/main.ba682cdb.chunk.js"
   ]
 }
